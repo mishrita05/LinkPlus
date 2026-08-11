@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My URLs</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/myUrls.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+<div class="container">
+<div class="page-header">
+
+    <div>
+
+        <h1>My URLs</h1>
+
+        <p>
+            Manage all your shortened URLs
+        </p>
+
+    </div>
+
+    <a href="/create" class="create-btn">
+
+        + Create URL
+
+    </a>
+
+</div>
+
+<p class="url-count">
+
+    Total URLs:
+    <strong><%= urls.length %></strong>
+
+</p>
+<div class="table-toolbar">
+
+    <input
+        type="text"
+        placeholder="Search alias..."
+        id="searchInput"
+    >
+
+</div>
+<div class="filters">
+
+    <button class="filter-btn active" data-filter="all">
+        All
+    </button>
+
+    <button class="filter-btn" data-filter="active">
+        Active
+    </button>
+
+    <button class="filter-btn" data-filter="expired">
+        Expired
+    </button>
+
+</div>
+    <div class="table-container">
+        <% if (urls) { %>
+         <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Alias</th>
+                    <th>Original URL</th>
+                    <th>Clicks</th>
+                    <th>Health</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <% urls.forEach((url, index) => { %>
+            <%
+            const status =
+                (url.expiresAt && url.expiresAt < new Date())
+                    ? "expired"
+                    : "active";
+            %>
+            <tr
+                data-alias="<%= (url.customAlias || url.shortId).toLowerCase() %>"
+                data-status="<%= status %>"
+            >
+
+                <td><%= index + 1 %></td>
+
+                <td>
+                    <strong>
+                        <%= url.customAlias || url.shortId %>
+                    </strong>
+                </td>
+
+                <td>
+                    <%= url.reDirectUrl %>
+                </td>
+
+                <td>
+                    <%= url.visitHistory.length %>
+                </td>
+
+                <td>
+
+                    <span class="health-badge <%= url.healthStatus.toLowerCase() %>">
+
+                        <%= url.healthStatus %>
+
+                    </span>
+
+                </td>
+
+                <td>
+
+
+                    <span class="status-badge <%= status %>">
+
+                        <%= status.charAt(0).toUpperCase() + status.slice(1) %>
+
+                    </span>
+
+                </td>
+
+                <td class="actions">
+                    <a
+                        href="#"
+                        class="copy-btn"
+                        data-short-url="http://localhost:8001/<%= url.customAlias || url.shortId %>"
+                        title="Copy Short URL"
+                    >
+                        <i class="bi bi-copy"></i>
+                    </a>
+
+                    <a href="/url/edit/<%= url._id %>" title="Edit URL">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+
+
+                    <a href="/url/qr/<%= url._id %>" title="Generate QR"><i class="bi bi-qr-code"></i></a>
+
+                    <a href="/url/summary/<%= url._id %>" title="Generate URL Summary"><i class="bi bi-file-text"></i></a>
+                    <form
+                        action="/url/delete/<%= url._id %>"
+                        method="POST"
+                        style="display:inline;"
+                        class="delete-form"
+                    >
+                        <button type="submit" title="Delete URL"><i class="bi bi-trash"></i></button>
+                    </form>
+                    <a
+                        href="/url/details/<%= url._id %>"
+                        title="View Details"
+                    >
+                        <i class="bi bi-info-circle"></i>
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <% }) %>
+
+            </tbody>
+         </table>
+        <% } %>
+    </div>
+    
+</div>
+</body>
+<div id="deleteModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Delete URL</h2>
+
+        <p>Are you sure you want to delete this URL?</p>
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelDelete"
+                class="btn-secondary">
+                Cancel
+            </button>
+
+            <button
+                id="confirmDelete"
+                class="btn-danger">
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="/js/copy.js"></script>
+<script src="/js/table.js"></script>
+<script src="/js/toast.js"></script>
+<script src="/js/deleteModal.js"></script>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <%- include("partials/navbar") %>
+
+<div class="signup-container">
+
+    <div class="signup-card">
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Join LinkPlus and start creating smart links.
+        </p>
+
+        <form id="signupForm" action="/user" method="POST">
+
+            <!-- Name -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="John Doe"
+                    required
+                    autofocus
+                >
+
+            </div>
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email <span class="required">*</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password <span class="required">*</span>
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                    <span class="toggle-password">
+                        <i class="bi bi-eye"></i>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Confirm Password -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password <span class="required">*</span>
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                    <span class="toggle-password">
+                        <i class="bi bi-eye"></i>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                id="signupBtn"
+                type="submit"
+                class="primary-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+        
+
+        <p class="bottom-text">
+
+            Already have an account?
+
+            <a href="/login">
+                Login
+
+            </a>
+
+        </p>
+
+    </div>
+
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+</div>
+</body>
+<script src="/js/toast.js"></script>
+<script src="/js/signup.js"></script>
+
+<script>
+
+    const error = "<%= error || '' %>";
+
+    if (error === "emailExists") {
+
+        showToast(
+            "⚠️ An account with this email already exists."
+        );
+
+    }
+
+</script>
+</html>

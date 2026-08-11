@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="/css/common.css">
+    
+</head>
+<body>
+<%- include("partials/navbar") %>
+<div class="dashboard">
+
+    <header class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p>Welcome back, <%= user.email %> 👋</p>
+    </header>
+
+    <section class="stats-grid">
+
+        <div class="card">
+            <h3>Total URLs</h3>
+            <p><%= stats.totalUrls %></p>
+        </div>
+
+        <div class="card">
+            <h3>Active URLs</h3>
+            <p><%= stats.activeUrls %></p>
+        </div>
+
+        <div class="card">
+            <h3>Expired URLs</h3>
+            <p><%= stats.expiredUrls %></p>
+        </div>
+
+        <div class="card">
+            <h3>Healthy Links</h3>
+            <p><%= stats.healthyLinks %></p>
+        </div>
+
+        <div class="card">
+            <h3>Broken Links</h3>
+            <p><%= stats.brokenLinks %></p>
+        </div>
+
+        <div class="card">
+            <h3>Total Clicks</h3>
+            <p><%= stats.totalClicks %></p>
+        </div>
+
+    </section>
+
+
+    <section class="recent-urls">
+
+        <div class="section-header">
+
+            <h2>Recent URLs</h2>
+
+            <a href="/my-urls">View All →</a>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Alias</th>
+                    <th>Health</th>
+                    <th>Clicks</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% recenturls.forEach((url)=> { %>
+
+                    <tr>
+
+                        <td>
+                            <%= url.customAlias || url.shortId %>
+                        </td>
+
+                        <td>
+
+                            <span class="health-badge <%= url.healthStatus.toLowerCase() %>">
+
+                                <%= url.healthStatus %>
+
+                            </span>
+
+                        </td>
+
+                        <td>
+                            <%= url.visitHistory.length %>
+                        </td>
+
+                        <td>
+
+                            <% const status = (url.expiresAt && url.expiresAt < new Date()) ? "expired" : "active"; %>
+
+                            <span class="status-badge <%= status %>">
+
+                                <%= status.charAt(0).toUpperCase() + status.slice(1) %>
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+
+</div>
+
+</body>
+<script src="/js/toast.js"></script>
+</html>

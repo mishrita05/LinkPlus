@@ -1,0 +1,150 @@
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f7fb;
+}
+
+.signup-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.signup-card{
+    width:100%;
+    max-width:600px;
+    background:white;
+    border-radius:16px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.signup-card h2{
+    margin-top:0;
+    margin-bottom:8px;
+    font-size:42px;
+    font-weight:700;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:30px;
+    font-size:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:8px;
+    color:#333;
+    font-size:16px;
+}
+
+.required{
+    color:#ef4444;
+}
+
+.form-group input{
+    padding:14px 16px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    transition:.2s;
+}
+
+.form-group input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper input{
+    width:100%;
+    padding-right:55px;
+    box-sizing:border-box;
+}
+
+.toggle-password{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#666;
+    font-size:18px;
+    transition:.2s;
+}
+
+.toggle-password:hover{
+    color:#2563eb;
+}
+
+.primary-btn{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    background:#1d4ed8;
+}
+
+.primary-btn:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+.bottom-text{
+    margin-top:24px;
+    text-align:center;
+    color:#555;
+    font-size:17px;
+}
+
+.bottom-text a{
+    color:#2563eb;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.bottom-text a:hover{
+    text-decoration:underline;
+}
+
+/* Hide Edge password reveal icon */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear{
+    display:none;
+}
+
+@media(max-width:768px){
+
+    .signup-card{
+        padding:25px;
+    }
+
+    .signup-card h2{
+        font-size:34px;
+    }
+
+}

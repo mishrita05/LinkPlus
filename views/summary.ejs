@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Summary</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/summary.css">
+</head>
+<body>
+<%- include("partials/navbar") %>
+
+<div class="summary-container">
+
+    <div class="summary-card">
+
+        <a href="/my-urls" class="back-btn">
+            ← Back to My URLs
+        </a>
+
+        <h2>AI Summary</h2>
+
+        <p class="subtitle">
+            AI-generated overview of the destination webpage.
+        </p>
+
+        <div class="summary-box">
+
+            <%= summary %>
+
+        </div>
+
+        <div class="info-group">
+
+            <label>Original URL</label>
+
+            <p>
+
+                <%= originalUrl %>
+
+            </p>
+
+        </div>
+
+        <div class="info-group">
+
+            <label>Short URL</label>
+
+            <p id="shortUrl">
+
+                <%= shortUrl %>
+
+            </p>
+
+        </div>
+
+        <div class="button-group">
+
+            <button
+                class="secondary-btn"
+                onclick="copyUrl()">
+
+                Copy Short URL
+
+            </button>
+
+            <a
+                href="<%= originalUrl %>"
+                target="_blank"
+                class="primary-btn">
+
+                Visit Website
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script src="/js/toast.js"></script>
+ <script src="/js/copy.js"></script>
+</html>

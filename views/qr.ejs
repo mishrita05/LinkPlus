@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/qr.css">
+</head>
+<body>
+    <%- include("partials/navbar") %>
+
+<div class="qr-container">
+
+    <div class="qr-card">
+
+        <a href="/my-urls" class="back-btn">
+            ← Back to My URLs
+        </a>
+
+        <h2>QR Code</h2>
+
+        <p class="subtitle">
+            Share your smart link using this QR code.
+        </p>
+
+        <div class="qr-image-box">
+            <img
+                id="qrImage"
+                src="<%= qrImage %>"
+                alt="QR Code"
+            >
+        </div>
+
+        <div class="info-group">
+
+            <label>Short URL</label>
+
+            <p id="shortUrl">
+                <%= fullUrl %>
+            </p>
+
+        </div>
+
+        <div class="info-group">
+
+            <label>Original URL</label>
+
+            <p>
+                <%= originalUrl %>
+            </p>
+
+        </div>
+
+        <div class="info-group">
+
+            <label>Total Clicks</label>
+
+            <p>
+                <%= clicks %>
+            </p>
+
+        </div>
+
+        <div class="button-group">
+
+            <button
+                class="secondary-btn"
+                onclick="copyUrl()">
+
+                Copy URL
+
+            </button>
+
+            <button
+                class="primary-btn"
+                onclick="downloadQR()">
+
+                Download QR
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script src="/js/qr.js"></script>
+ <script src="/js/copy.js"></script>
+ <script src="/js/toast.js"></script>
+</html>

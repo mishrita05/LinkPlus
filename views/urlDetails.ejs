@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Details</title>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/urlDetails.css">
+</head>
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container">
+
+    <h1>URL Details</h1>
+
+    <div class="details-card">
+
+        <div class="detail-row">
+            <span>Alias</span>
+            <strong><%= url.customAlias || url.shortId %></strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Original URL</span>
+            <strong><%= url.reDirectUrl %></strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Short URL</span>
+            <strong>
+                <a
+                    href="/<%= url.customAlias || url.shortId %>"
+                    target="_blank">
+                    http://localhost:8001/<%= url.customAlias || url.shortId %>
+                </a>
+            </strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Total Clicks</span>
+            <strong><%= url.visitHistory.length %></strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Health</span>
+
+            <span class="health-badge <%= url.healthStatus.toLowerCase() %>">
+                <%= url.healthStatus %>
+            </span>
+        </div>
+
+        <% const status = (url.expiresAt && url.expiresAt < new Date())
+            ? "expired"
+            : "active";
+        %>
+
+        <div class="detail-row">
+            <span>Status</span>
+
+            <span class="status-badge <%= status %>">
+                <%= status.charAt(0).toUpperCase() + status.slice(1) %>
+            </span>
+        </div>
+
+        <div class="detail-row">
+            <span>Status Code</span>
+            <strong><%= url.statusCode || "-" %></strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Response Time</span>
+            <strong>
+                <%= url.responseTime ? url.responseTime + " ms" : "-" %>
+            </strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Last Checked</span>
+
+            <strong>
+                <%= url.lastChecked ? url.lastChecked.toLocaleString() : "-" %>
+            </strong>
+        </div>
+
+        <div class="detail-row">
+            <span>Expiry</span>
+
+            <strong>
+                <% if(url.expiresAt){ %>
+
+                    <%= url.expiresAt.toLocaleDateString() %>
+
+                <% } else { %>
+
+                    Never
+
+                <% } %>
+            </strong>
+        </div>
+        <div class="detail-row">
+            <span>Created On</span>
+            <strong><%= url.createdAt.toLocaleString() %></strong>
+        </div>
+
+    </div>
+<div class="detail-actions">
+
+    <button
+        class="copy-btn"
+        data-short-url="http://localhost:8001/<%= url.customAlias || url.shortId %>">
+        Copy Short URL
+    </button>
+
+    <a
+        href="<%= url.reDirectUrl %>"
+        target="_blank"
+        class="btn-secondary">
+        Open Original URL
+    </a>
+
+    <a
+        href="/my-urls"
+        class="btn-secondary">
+        Back
+    </a>
+
+</div>
+</div>
+
+</body>
+<script src="/js/copy.js"></script>
+<script src="/js/toast.js"></script>
+</html>
