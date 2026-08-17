@@ -17,6 +17,10 @@ const urlschema= new mongoose.Schema({
         type:String,
         required:true,
     },
+    faviconUrl: {
+        type: String,
+        default: "",
+    },
     visitHistory:[{ timestamp:{type:Number}}],
     healthStatus: {
         type: String,

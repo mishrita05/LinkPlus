@@ -69,3 +69,19 @@
     text-align: right;
     word-break: break-word;
 }
+
+.details-favicon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.details-fallback-icon {
+    font-size: 64px;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+}

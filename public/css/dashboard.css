@@ -102,3 +102,65 @@ body {
     font-weight: 600;
 }
 
+/* Quick Links */
+
+.quick-links {
+    margin-top: 30px;
+}
+
+.quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+}
+
+.quick-link-card {
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    transition: 0.2s ease;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-3px);
+}
+
+.quick-link-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-link-icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.quick-link-icon span {
+    font-size: 38px;
+}
+
+.quick-link-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.quick-link-domain {
+    font-size: 13px;
+    color: #777;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

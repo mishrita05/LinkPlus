@@ -51,6 +51,63 @@
 
     </section>
 
+    <!-- Quick Links -->
+
+        <section class="quick-links">
+
+            <div class="section-header">
+
+                <h2>Quick Links</h2>
+
+                <a href="/shortcuts">View All →</a>
+
+            </div>
+
+            <div class="quick-links-grid">
+
+                <% recenturls.forEach((url) => { %>
+
+                    <a
+                        href="/<%= url.customAlias || url.shortId %>"
+                        class="quick-link-card"
+                    >
+
+                        <div class="quick-link-icon">
+
+                            <% if (url.faviconUrl) { %>
+
+                                <img
+                                    src="<%= url.faviconUrl %>"
+                                    alt=""
+                                >
+
+                            <% } else { %>
+
+                                <span>🔗</span>
+
+                            <% } %>
+
+                        </div>
+
+                        <div class="quick-link-name">
+
+                            <%= url.customAlias || url.shortId %>
+
+                        </div>
+
+                        <div class="quick-link-domain">
+
+                            <%= new URL(url.reDirectUrl).hostname %>
+
+                        </div>
+
+                    </a>
+
+                <% }) %>
+
+            </div>
+
+        </section>
 
     <section class="recent-urls">
 
@@ -121,6 +178,8 @@
 
     </section>
 
+
+    </div>
 
 
 </div>

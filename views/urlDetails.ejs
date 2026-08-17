@@ -13,7 +13,19 @@
 <%- include("partials/navbar") %>
 
 <div class="container">
+    <% if (url.faviconUrl) { %>
 
+        <img
+            src="<%= url.faviconUrl %>"
+            alt="Website icon"
+            class="details-favicon"
+        >
+
+    <% } else { %>
+
+        <i class="bi bi-link-45deg details-fallback-icon"></i>
+
+    <% } %>
     <h1>URL Details</h1>
 
     <div class="details-card">

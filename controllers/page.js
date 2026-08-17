@@ -67,6 +67,18 @@ async function getLogInPage(req, res) {
 
 }
 
+async function getShortcutsPage(req, res) {
+
+    const urls = await url.find({
+        createdBy: req.user._id,
+    }).sort({
+        createdAt: -1,
+    });
+
+    return res.render("shortcuts", {
+        urls,
+    });
+}
 
 module.exports = {
     getDashboardPage,
@@ -75,4 +87,5 @@ module.exports = {
     getSignUpPage,
     getLogInPage,
     getCreateUrlPage,
+    getShortcutsPage,
 };

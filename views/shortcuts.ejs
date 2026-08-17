@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Shortcuts</title>
+
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/shortcuts.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="shortcuts-container">
+
+    <!-- Header -->
+
+    <div class="shortcuts-header">
+
+        <div>
+            <h1>My Shortcuts</h1>
+
+            <p>
+                Quickly access your shortened URLs.
+            </p>
+        </div>
+
+        <a href="/create" class="create-btn">
+            + Create URL
+        </a>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="shortcuts-toolbar">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search shortcuts..."
+        >
+
+    </div>
+
+
+    <!-- Filters -->
+
+    <div class="shortcuts-filter-bar">
+
+        <button
+            class="shortcuts-filter-btn active"
+            data-filter="all"
+        >
+            All
+        </button>
+
+        <button
+            class="shortcuts-filter-btn"
+            data-filter="active"
+        >
+            Active
+        </button>
+
+        <button
+            class="shortcuts-filter-btn"
+            data-filter="expired"
+        >
+            Expired
+        </button>
+
+    </div>
+
+
+    <!-- Shortcut Grid -->
+
+    <div class="shortcuts-grid">
+
+        <% urls.forEach((url) => { %>
+
+            <%
+                const status =
+                    (url.expiresAt && url.expiresAt < new Date())
+                    ? "expired"
+                    : "active";
+
+                const alias =
+                    url.customAlias || url.shortId;
+            %>
+
+
+            <a
+                href="/<%= alias %>"
+                class="shortcut-card"
+                data-status="<%= status %>"
+                data-name="<%= alias.toLowerCase() %>"
+            >
+
+                <!-- Icon -->
+
+                <div class="shortcut-icon">
+
+                    <% if (url.faviconUrl) { %>
+
+                        <img
+                            src="<%= url.faviconUrl %>"
+                            alt=""
+                        >
+
+                    <% } else { %>
+
+                        <i class="bi bi-link-45deg"></i>
+
+                    <% } %>
+
+                </div>
+
+
+                <!-- Alias -->
+
+                <h3>
+                    <%= alias %>
+                </h3>
+
+
+                <!-- Website -->
+
+                <p class="shortcut-domain">
+
+                    <%= new URL(url.reDirectUrl).hostname %>
+
+                </p>
+
+
+                <!-- Clicks -->
+
+                <p class="shortcut-clicks">
+
+                    <%= url.visitHistory.length %> clicks
+
+                </p>
+
+
+                <!-- Status -->
+
+                <span class="shortcut-status <%= status %>">
+
+                    <%= status.charAt(0).toUpperCase() + status.slice(1) %>
+
+                </span>
+
+            </a>
+
+        <% }) %>
+
+    </div>
+
+
+    <!-- No Results -->
+
+    <div
+        id="noShortcuts"
+        class="no-shortcuts"
+        style="display:none;"
+    >
+
+        <i class="bi bi-search"></i>
+
+        <p>No shortcuts found.</p>
+
+    </div>
+
+</div>
+
+
+<script src="/js/table.js"></script>
+
+</body>
+
+</html>

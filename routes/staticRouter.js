@@ -2,7 +2,7 @@ const express=require("express");
 const router=express.Router();
 
 
-const { getDashboardPage ,getMyUrlsPage,getCreateUrlPage ,getSignUpPage,getLogInPage} = require("../controllers/page");
+const { getDashboardPage ,getMyUrlsPage,getCreateUrlPage ,getSignUpPage,getLogInPage,getShortcutsPage} = require("../controllers/page");
 
 const {
     restrictToLoggedinUserOnly
@@ -18,6 +18,12 @@ router.get(
     "/my-urls",
     restrictToLoggedinUserOnly,
     getMyUrlsPage
+);
+
+router.get(
+    "/shortcuts",
+    restrictToLoggedinUserOnly,
+    getShortcutsPage
 );
 
 router.get(

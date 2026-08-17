@@ -59,10 +59,25 @@ async function generateShortUrl(req,res){
     }
 
     const shortId=nanoid(8);
+    let faviconUrl = "";
+
+    try {
+        const webpage = await getWebpageContent(originalUrl);
+
+        console.log("WEBPAGE DATA:", webpage);
+
+        faviconUrl = webpage.faviconUrl;
+
+        console.log("FAVICON URL:", faviconUrl);
+
+    } catch (error) {
+        console.log("Could not fetch webpage:", error);
+    }
     await url.create({
         shortId: shortId,
         customAlias: customAlias || null,
         reDirectUrl: originalUrl,
+        faviconUrl: faviconUrl,
         visitHistory:[],
         expiresAt,
         createdBy:req.user._id,

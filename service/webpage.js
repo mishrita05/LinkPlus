@@ -19,6 +19,33 @@ async function getWebpageContent(url) {
     const description =
         $('meta[name="description"]').attr("content")?.trim() || "";
 
+// Get favicon
+    let faviconUrl =
+        $('link[rel="icon"]').attr("href") ||
+        $('link[rel="shortcut icon"]').attr("href") ||
+        $('link[rel="apple-touch-icon"]').attr("href") ||
+        "";
+
+    // Convert relative favicon URL into an absolute URL
+    if (faviconUrl) {
+        try {
+            faviconUrl = new URL(faviconUrl, url).href;
+        } catch (error) {
+            faviconUrl = "";
+        }
+    }
+    // Fallback if the website does not expose a favicon
+    if (!faviconUrl) {
+        try {
+            const parsedUrl = new URL(url);
+
+            faviconUrl =
+                `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}&sz=64`;
+
+        } catch (error) {
+            faviconUrl = "";
+        }
+    }
     // Remove unnecessary elements
     $(
         "script, style, nav, footer, header, aside, " +
@@ -35,6 +62,7 @@ async function getWebpageContent(url) {
         title,
         description,
         content,
+        faviconUrl,
     };
 }
 
